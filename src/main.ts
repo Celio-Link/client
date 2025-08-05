@@ -26,22 +26,14 @@ function handleData(data: DataArray) {
 }
 
 function handleStatus(status: LinkStatus) {
-  if (
-    status === LinkStatus.GameboyConnected ||
-    status === LinkStatus.GameboyDisconnected
-  ) {
     const textFiled: HTMLTextAreaElement | null = document.querySelector<HTMLTextAreaElement>('#input');
     console.log('Device notified state: ' + LinkStatus[status]);
     if (textFiled) {
       textFiled.value = '';
       textFiled.value += LinkStatus[status];
     }
-  } else if (status === LinkStatus.StatusDebug) {
-    console.log('Debug State: ' + LinkStatus[status]);
-  } else {
     const message: StatusMessage = { type: 'status', statusType: status };
     client.send(JSON.stringify({ message }));
-  }
 }
 
 client.bind('join', (message: JoinMessage) => {

@@ -22,22 +22,14 @@ function handleData(data) {
     }
 }
 function handleStatus(status) {
-    if (status === LinkStatus.GameboyConnected ||
-        status === LinkStatus.GameboyDisconnected) {
-        const textFiled = document.querySelector('#input');
-        console.log('Device notified state: ' + LinkStatus[status]);
-        if (textFiled) {
-            textFiled.value = '';
-            textFiled.value += LinkStatus[status];
-        }
+    const textFiled = document.querySelector('#input');
+    console.log('Device notified state: ' + LinkStatus[status]);
+    if (textFiled) {
+        textFiled.value = '';
+        textFiled.value += LinkStatus[status];
     }
-    else if (status === LinkStatus.StatusDebug) {
-        console.log('Debug State: ' + LinkStatus[status]);
-    }
-    else {
-        const message = { type: 'status', statusType: status };
-        client.send(JSON.stringify({ message }));
-    }
+    const message = { type: 'status', statusType: status };
+    client.send(JSON.stringify({ message }));
 }
 client.bind('join', (message) => {
     const labelField = document.querySelector('#id');
