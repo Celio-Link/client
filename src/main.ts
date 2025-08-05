@@ -2,7 +2,7 @@ import { CommandType, DataArray, LinkDevice, LinkStatus, Mode} from './linkDevic
 import { Client } from './client.js';
 import { CommandMessage, JoinMessage, SessionCreationMessage, StatusMessage, } from './messages';
 
-let client = new Client('ws://localhost:8080');
+let client = new Client('wss://server-production-e17f.up.railway.app');
 let queue: DataArray[] = [];
 let linkDevice: LinkDevice;
 

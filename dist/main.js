@@ -1,6 +1,6 @@
 import { CommandType, LinkDevice, LinkStatus, Mode } from './linkDevice.js';
 import { Client } from './client.js';
-let client = new Client('ws://localhost:8080');
+let client = new Client('wss://server-production-e17f.up.railway.app');
 let queue = [];
 let linkDevice;
 function handleData(data) {
