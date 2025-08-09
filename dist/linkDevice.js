@@ -93,7 +93,6 @@ export class LinkDevice {
     sendData(data) {
         const uint16Array = new Uint16Array(data);
         this.device.transferOut(this.dataEndpoint, uint16Array).then((result) => { console.log(result); }, (err) => { console.log(err); });
-        console.log("Transferring data to device: ", +uint16Array.toString());
     }
     sendCommand(command, args = new Uint8Array(0)) {
         let message = new Uint8Array(1 + args.length);

@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>WebUSB Serial Sample Application</title>
+  <title>Celio-Link</title>
 </head>
 
 <body>
 <script type="module" src="dist/main.js"></script>
 <div>
-  <button id="connect" style="visibility: initial">Connect To WebUSB Device</button>
+  <button id="connect" style="visibility: initial">Connect To Celio-Link device</button>
 </div>
+<br>
+
 <div>
   <label id="sessionStatus">Session Connection Status: </label>
 </div>
@@ -16,19 +18,21 @@
   <label id="id">None</label>
 </div>
 
-<div>
-
-</div>
-<br><br><label for="input">Gameboy Connection Status</label> <br>
-<textarea id="input" rows="1" cols="80"></textarea>
-<br><button id="linkMode">Set Link Mode</button>
-<br><button id="emuMode">Set Trade Mode</button>
-<br><br>
-
 <div class="join-box">
   <label for="otherId"></label><input type="text" id="otherId" placeholder="Enter session ID" />
   <button id="createSession">Create Session</button>
 </div>
+
+
+
+<div>
+  <br><button id="linkMode">Set Link Mode</button>
+</div>
+<label for="input">Gameboy Connection Status</label> <br>
+<textarea id="input" rows="1" cols="80"></textarea>
+
+<!--<br><button id="emuMode">Set Trade Mode</button>-->
+<br><br>
 
 <label for="output">Receiver: </label> <br>
 <textarea id="output" rows="25" cols="80"></textarea>

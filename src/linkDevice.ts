@@ -82,7 +82,6 @@ export class LinkDevice
     this.device.transferOut(this.dataEndpoint, uint16Array).then(
       (result: USBInTransferResult) => {console.log(result)},
       (err: Error) => {console.log(err)})
-    console.log("Transferring data to device: ", + uint16Array.toString());
   }
 
   sendCommand(command: CommandType, args: Uint8Array = new Uint8Array(0)) {

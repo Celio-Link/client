@@ -8,9 +8,11 @@ let linkDevice: LinkDevice;
 
 function handleData(data: DataArray) {
   if (queue.length > 0) {
-    linkDevice.sendData(queue.shift()!)
+    let data = queue.shift();
+    linkDevice.sendData(data!)
+    console.log("Sending data to device " + data!.toString())
   }
-  console.log("Device has send Data" + data.toString())
+  console.log("Device has send Data " + data.toString())
   if (data[0] == 0x00) return;
   if ((data[0] == 0xCAFE) && (data[1] == 0x11)) return;
 
@@ -60,7 +62,6 @@ client.bind('data', (data: Blob) => {
     const array = new Uint16Array(buffer, 0, 8);
     const dataArray = Array.from(array) as DataArray;
     queue.push(dataArray)
-    console.log('Data received: ' + data.toString());
   })
 });
 
@@ -91,15 +92,15 @@ window.onload = function () {
     };
   }
 
-  const emuButton = document.querySelector<HTMLButtonElement>('#emuMode');
-  if (emuButton) {
-    emuButton.onclick = () => {
-      if (linkDevice == null) return;
-      let args: Uint8Array = new Uint8Array(1);
-      args[0] = Mode.tradeEmu;
-      linkDevice.sendCommand(CommandType.SetMode, args);
-    };
-  }
+  // const emuButton = document.querySelector<HTMLButtonElement>('#emuMode');
+  // if (emuButton) {
+  //   emuButton.onclick = () => {
+  //     if (linkDevice == null) return;
+  //     let args: Uint8Array = new Uint8Array(1);
+  //     args[0] = Mode.tradeEmu;
+  //     linkDevice.sendCommand(CommandType.SetMode, args);
+  //   };
+  // }
 
   const joinButton =
     document.querySelector<HTMLButtonElement>('#createSession');
@@ -114,26 +115,6 @@ window.onload = function () {
         otherId: sessionId,
       };
       client.send(JSON.stringify(message));
-    };
-  }
-
-  const masterButton = document.querySelector<HTMLButtonElement>('#master');
-  if (masterButton) {
-    masterButton.onclick = () => {
-      if (linkDevice == null) return;
-      let args: Uint8Array = new Uint8Array(1);
-      args[0] = Mode.onlineLink;
-      linkDevice.sendCommand(CommandType.SetModeMaster);
-    };
-  }
-
-  const slaveButton = document.querySelector<HTMLButtonElement>('#slave');
-  if (slaveButton) {
-    slaveButton.onclick = () => {
-      if (linkDevice == null) return;
-      let args: Uint8Array = new Uint8Array(1);
-      args[0] = Mode.tradeEmu;
-      linkDevice.sendCommand(CommandType.SetModeSlave);
     };
   }
 
